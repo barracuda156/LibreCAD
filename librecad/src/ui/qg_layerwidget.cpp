@@ -227,49 +227,56 @@ QG_LayerWidget::QG_LayerWidget(QG_ActionHandler* ah, QWidget* parent,
     but->setIcon(QIcon(":/icons/visible.svg"));
     but->setMinimumSize(minButSize);
     but->setToolTip(tr("Show all layers"));
-    connect(but, &QToolButton::clicked, actionHandler, &QG_ActionHandler::slotLayersDefreezeAll);
+    connect(but, SIGNAL(clicked()),
+            actionHandler, SLOT(slotLayersDefreezeAll()));
     layButtons->addWidget(but);
     // hide all layer:
     but = new QToolButton(this);
     but->setIcon(QIcon(":/icons/invisible.svg"));
     but->setMinimumSize(minButSize);
     but->setToolTip(tr("Hide all layers"));
-    connect(but, &QToolButton::clicked, actionHandler, &QG_ActionHandler::slotLayersFreezeAll);
+    connect(but, SIGNAL(clicked()),
+            actionHandler, SLOT(slotLayersFreezeAll()));
     layButtons->addWidget(but);
     // unlock all layers:
     but = new QToolButton(this);
     but->setIcon(QIcon(":/icons/unlocked.svg"));
     but->setMinimumSize(minButSize);
     but->setToolTip(tr("Unlock all layers"));
-    connect(but, &QToolButton::clicked, actionHandler, &QG_ActionHandler::slotLayersUnlockAll);
+    connect(but, SIGNAL(clicked()),
+            actionHandler, SLOT(slotLayersUnlockAll()));
     layButtons->addWidget(but);
     // lock all layers:
     but = new QToolButton(this);
     but->setIcon(QIcon(":/icons/locked.svg"));
     but->setMinimumSize(minButSize);
     but->setToolTip(tr("Lock all layers"));
-    connect(but, &QToolButton::clicked, actionHandler, &QG_ActionHandler::slotLayersLockAll);
+    connect(but, SIGNAL(clicked()),
+            actionHandler, SLOT(slotLayersLockAll()));
     layButtons->addWidget(but);
     // add layer:
     but = new QToolButton(this);
     but->setIcon(QIcon(":/icons/add.svg"));
     but->setMinimumSize(minButSize);
     but->setToolTip(tr("Add a layer"));
-    connect(but, &QToolButton::clicked, actionHandler, &QG_ActionHandler::slotLayersAdd);
+    connect(but, SIGNAL(clicked()),
+            actionHandler, SLOT(slotLayersAdd()));
     layButtons->addWidget(but);
     // remove layer:
     but = new QToolButton(this);
     but->setIcon(QIcon(":/icons/remove.svg"));
     but->setMinimumSize(minButSize);
     but->setToolTip(tr("Remove layer"));
-    connect(but, &QToolButton::clicked, actionHandler, &QG_ActionHandler::slotLayersRemove);
+    connect(but, SIGNAL(clicked()),
+            actionHandler, SLOT(slotLayersRemove()));
     layButtons->addWidget(but);
     // rename layer:
     but = new QToolButton(this);
     but->setIcon(QIcon(":/icons/rename_active_block.svg"));
     but->setMinimumSize(minButSize);
     but->setToolTip(tr("Modify layer attributes / rename"));
-    connect(but, &QToolButton::clicked, actionHandler, &QG_ActionHandler::slotLayersEdit);
+    connect(but, SIGNAL(clicked()),
+            actionHandler, SLOT(slotLayersEdit()));
     layButtons->addWidget(but);
 
     // lineEdit to filter layer list with RegEx
@@ -278,16 +285,17 @@ QG_LayerWidget::QG_LayerWidget(QG_ActionHandler* ah, QWidget* parent,
     matchLayerName->setPlaceholderText(tr("Filter"));
     matchLayerName->setClearButtonEnabled(true);
     matchLayerName->setToolTip(tr("Looking for matching layer names"));
-    connect(matchLayerName, &QLineEdit::textChanged, this, &QG_LayerWidget::slotUpdateLayerList);
+    connect(matchLayerName, SIGNAL( textChanged(QString) ), this, SLOT( slotUpdateLayerList() ) );
 
     lay->addWidget(matchLayerName);
     lay->addLayout(layButtons);
     lay->addWidget(layerView);
     this->setLayout(lay);
 
-    connect( layerView, &QTableView::clicked, this, &QG_LayerWidget::slotActivated);
-    connect( layerView->selectionModel(), &QItemSelectionModel::selectionChanged,
-             this, &QG_LayerWidget::slotSelectionChanged);
+    connect(layerView, SIGNAL(clicked(QModelIndex)), this, SLOT(slotActivated(QModelIndex)));
+    connect(layerView->selectionModel(),
+        SIGNAL(selectionChanged(QItemSelection, QItemSelection)),
+        this, SLOT(slotSelectionChanged(QItemSelection, QItemSelection)));
 }
 
 
