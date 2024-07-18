@@ -55,9 +55,6 @@ public slots:
     virtual void setActionHandler( QG_ActionHandler * ah );
     virtual void keyPressEvent( QKeyEvent * e );
     virtual void insert();
-    virtual void refresh();
-    virtual void scanTree();
-    virtual void buildTree();
     virtual void appendTree( QStandardItem * item, QString directory );
     virtual void updatePreview( QModelIndex idx );
     virtual void expandView( QModelIndex idx );
@@ -71,12 +68,10 @@ protected slots:
 
 private:
     QG_ActionHandler* actionHandler;
-    QStandardItemModel *dirModel {nullptr};
-    QStandardItemModel *iconModel {nullptr};
+    QStandardItemModel *dirModel;
+    QStandardItemModel *iconModel;
     QTreeView *dirView;
     QListView *ivPreview;
-    QPushButton *bRefresh;
-    QPushButton *bRebuild;
 };
 
 #endif // QG_LIBRARYWIDGET_H
