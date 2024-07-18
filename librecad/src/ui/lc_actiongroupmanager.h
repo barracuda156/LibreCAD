@@ -7,14 +7,13 @@
 
 class QActionGroup;
 class QAction;
-class QC_ApplicationWindow;
 
 class LC_ActionGroupManager : public QObject
 {
     Q_OBJECT
 
 public:
-    explicit LC_ActionGroupManager(QC_ApplicationWindow* parent);
+    explicit LC_ActionGroupManager(QObject* parent);
 
     QActionGroup* block;
     QActionGroup* circle;
