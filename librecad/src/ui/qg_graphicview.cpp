@@ -30,7 +30,6 @@
 #include <QLabel>
 #include <QMenu>
 #include <QDebug>
-#include <QNativeGestureEvent>
 
 #include "rs_actionzoomin.h"
 #include "rs_actionzoompan.h"
@@ -349,31 +348,6 @@ void QG_GraphicView::mouseMoveEvent(QMouseEvent* event)
 
 bool QG_GraphicView::event(QEvent *event)
 {
-    if (event->type() == QEvent::NativeGesture) {
-        QNativeGestureEvent *nge = static_cast<QNativeGestureEvent *>(event);
-
-        if (nge->gestureType() == Qt::ZoomNativeGesture) {
-            double v = nge->value();
-            RS2::ZoomDirection direction;
-            double factor;
-
-            if (v < 0) {
-                direction = RS2::Out;
-                factor = 1-v;
-            } else {
-                direction = RS2::In;
-                factor = 1+v;
-            }
-
-            // It seems the NativeGestureEvent::pos() incorrectly reports global coordinates
-            QPoint g = mapFromGlobal(nge->globalPos());
-            RS_Vector mouse = toGraph(g.x(), g.y());
-            setCurrentAction(new RS_ActionZoomIn(*container, *this, direction,
-												 RS2::Both, &mouse, factor));
-        }
-
-        return true;
-    }
     return QWidget::event(event);
 }
 
