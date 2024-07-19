@@ -36,7 +36,7 @@
 #include "rs.h"
 #include "rs_debug.h"
 
-#include <QStandardPaths>
+#include <QDesktopServices>
 
 RS_System* RS_System::uniqueInstance = NULL;
 
@@ -498,7 +498,7 @@ bool RS_System::createPaths(const QString& directory) {
  */
 QString RS_System::getAppDataDir() {
     QString appData =
-            QStandardPaths::writableLocation( QStandardPaths::DataLocation);
+            QDesktopServices::storageLocation(QDesktopServices::DataLocation);
     QDir dir( appData);
     if (!dir.exists()) {
         if (!dir.mkpath( appData))
@@ -561,11 +561,11 @@ QStringList RS_System::getDirectoryList(const QString& _subDirectory) {
     QString subDirectory = QDir::fromNativeSeparators( _subDirectory);
 
 #ifdef Q_OS_MAC
-    dirList.append( QStandardPaths::writableLocation( QStandardPaths::DocumentsLocation) + "/" + appDirName + "/" + subDirectory);
+    dirList.append(QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation) + "/" + appDirName + "/" + subDirectory);
 #endif // Q_OS_MAC
 
 #ifdef Q_OS_WIN32
-    dirList.append( QStandardPaths::writableLocation( QStandardPaths::DocumentsLocation) + "/" + appDirName + "/" + subDirectory);
+    dirList.append(QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation) + "/" + appDirName + "/" + subDirectory);
 #endif // Q_OS_WIN32
 
     // Unix home directory, it's old style but some people might have stuff there.
@@ -589,11 +589,9 @@ QStringList RS_System::getDirectoryList(const QString& _subDirectory) {
 
     // try various locations for different Linux distributions
     dirList.append( QDir::cleanPath( appDir + "/../share/" + appDirName + "/" + subDirectory));
-    dirList.append( QDir::cleanPath( appDir + "/../lib64/" + appDirName + "/" + subDirectory));
     dirList.append( QDir::cleanPath( appDir + "/../lib/" + appDirName + "/" + subDirectory));
 
     if (QLatin1String( "plugins") == subDirectory) {
-        dirList.append( QDir::cleanPath( appDir + "/../lib64/" + appDirName));
         dirList.append( QDir::cleanPath( appDir + "/../lib/" + appDirName));
     }
 #endif
