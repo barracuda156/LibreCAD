@@ -937,7 +937,7 @@ QString RS_Units::paperFormatToString(RS2::PaperFormat p) {
         break;
     }
 
-    return QStringLiteral("");
+    return QLatin1String("");
 }
 
 
@@ -949,49 +949,49 @@ RS2::PaperFormat RS_Units::stringToPaperFormat(const QString& p) {
     QString ls {p.toLower()};
 
     // use toLower() on localized paper format strings, don't trust that translators keep lower case
-    if (ls == QStringLiteral("custom") || ls == QObject::tr("custom", "Paper format").toLower())
+    if (ls == QLatin1String("custom") || ls == QObject::tr("custom", "Paper format").toLower())
         return RS2::Custom;
 
-    if (ls == QStringLiteral("a0") || ls == QObject::tr("a0", "Paper format").toLower())
+    if (ls == QLatin1String("a0") || ls == QObject::tr("a0", "Paper format").toLower())
         return RS2::A0;
-    if (ls == QStringLiteral("a1") || ls == QObject::tr("a1", "Paper format").toLower())
+    if (ls == QLatin1String("a1") || ls == QObject::tr("a1", "Paper format").toLower())
         return RS2::A1;
-    if (ls == QStringLiteral("a2") || ls == QObject::tr("a2", "Paper format").toLower())
+    if (ls == QLatin1String("a2") || ls == QObject::tr("a2", "Paper format").toLower())
         return RS2::A2;
-    if (ls == QStringLiteral("a3") || ls == QObject::tr("a3", "Paper format").toLower())
+    if (ls == QLatin1String("a3") || ls == QObject::tr("a3", "Paper format").toLower())
         return RS2::A3;
-    if (ls == QStringLiteral("a4") || ls == QObject::tr("a4", "Paper format").toLower())
+    if (ls == QLatin1String("a4") || ls == QObject::tr("a4", "Paper format").toLower())
         return RS2::A4;
 
     /* Removed ISO "B" and "C" series, C5E, Comm10E, DLE, (envelope sizes) */
 
-    if (ls == QStringLiteral("letter") || ls == QObject::tr("letter", "Paper format").toLower())
+    if (ls == QLatin1String("letter") || ls == QObject::tr("letter", "Paper format").toLower())
         return RS2::Letter;
-    if (ls == QStringLiteral("legal")  || ls == QObject::tr("legal",  "Paper format").toLower())
+    if (ls == QLatin1String("legal")  || ls == QObject::tr("legal",  "Paper format").toLower())
         return RS2::Legal;
-    if (ls == QStringLiteral("tabloid") || ls == QObject::tr("tabloid", "Paper format").toLower())
+    if (ls == QLatin1String("tabloid") || ls == QObject::tr("tabloid", "Paper format").toLower())
         return RS2::Tabloid;
 
-    //if (ls == QStringLiteral("ansi a") || ls == QObject::tr("ansi a", "Paper format").toLower())
+    //if (ls == QLatin1String("ansi a") || ls == QObject::tr("ansi a", "Paper format").toLower())
     //    return RS2::Ansi_A;
-    //if (ls == QStringLiteral("ansi b") || ls == QObject::tr("ansi b", "Paper format").toLower())
+    //if (ls == QLatin1String("ansi b") || ls == QObject::tr("ansi b", "Paper format").toLower())
     //    return RS2::Ansi_B;
-    if (ls == QStringLiteral("ansi c") || ls == QObject::tr("ansi c", "Paper format").toLower())
+    if (ls == QLatin1String("ansi c") || ls == QObject::tr("ansi c", "Paper format").toLower())
         return RS2::Ansi_C;
-    if (ls == QStringLiteral("ansi d") || ls == QObject::tr("ansi d", "Paper format").toLower())
+    if (ls == QLatin1String("ansi d") || ls == QObject::tr("ansi d", "Paper format").toLower())
         return RS2::Ansi_D;
-    if (ls == QStringLiteral("ansi e") || ls == QObject::tr("ansi e", "Paper format").toLower())
+    if (ls == QLatin1String("ansi e") || ls == QObject::tr("ansi e", "Paper format").toLower())
         return RS2::Ansi_E;
 
-    if (ls == QStringLiteral("arch a") || ls == QObject::tr("arch a", "Paper format").toLower())
+    if (ls == QLatin1String("arch a") || ls == QObject::tr("arch a", "Paper format").toLower())
         return RS2::Arch_A;
-    if (ls == QStringLiteral("arch b") || ls == QObject::tr("arch b", "Paper format").toLower())
+    if (ls == QLatin1String("arch b") || ls == QObject::tr("arch b", "Paper format").toLower())
         return RS2::Arch_B;
-    if (ls == QStringLiteral("arch c") || ls == QObject::tr("arch c", "Paper format").toLower())
+    if (ls == QLatin1String("arch c") || ls == QObject::tr("arch c", "Paper format").toLower())
         return RS2::Arch_C;
-    if (ls == QStringLiteral("arch d") || ls == QObject::tr("arch d", "Paper format").toLower())
+    if (ls == QLatin1String("arch d") || ls == QObject::tr("arch d", "Paper format").toLower())
         return RS2::Arch_D;
-    if (ls == QStringLiteral("arch e") || ls == QObject::tr("arch e", "Paper format").toLower())
+    if (ls == QLatin1String("arch e") || ls == QObject::tr("arch e", "Paper format").toLower())
         return RS2::Arch_E;
 
     return RS2::Custom;

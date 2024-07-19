@@ -141,9 +141,9 @@ RS_Entity* RS_DimAngular::clone() const
  */
 QString RS_DimAngular::getMeasuredLabel()
 {
-    int dimaunit {getGraphicVariableInt( QStringLiteral( "$DIMAUNIT"), 0)};
-    int dimadec {getGraphicVariableInt( QStringLiteral( "$DIMADEC"), 0)};
-    int dimazin {getGraphicVariableInt( QStringLiteral( "$DIMAZIN"), 0)};
+    int dimaunit {getGraphicVariableInt( QLatin1String( "$DIMAUNIT"), 0)};
+    int dimadec {getGraphicVariableInt( QLatin1String( "$DIMADEC"), 0)};
+    int dimazin {getGraphicVariableInt( QLatin1String( "$DIMAZIN"), 0)};
     RS2::AngleFormat format {RS_Units::numberToAngleFormat( dimaunit)};
     QString strLabel( RS_Units::formatAngle( dimAngle, format, dimadec));
 
@@ -154,7 +154,7 @@ QString RS_DimAngular::getMeasuredLabel()
 
     //verify if units are decimal and comma separator
     if (RS2::DegreesMinutesSeconds != dimaunit) {
-        if (',' == getGraphicVariableInt( QStringLiteral( "$DIMDSEP"), 0)) {
+        if (',' == getGraphicVariableInt( QLatin1String( "$DIMDSEP"), 0)) {
             strLabel.replace( QChar('.'), QChar(','));
         }
     }

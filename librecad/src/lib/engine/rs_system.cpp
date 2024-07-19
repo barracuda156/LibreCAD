@@ -592,7 +592,7 @@ QStringList RS_System::getDirectoryList(const QString& _subDirectory) {
     dirList.append( QDir::cleanPath( appDir + "/../lib64/" + appDirName + "/" + subDirectory));
     dirList.append( QDir::cleanPath( appDir + "/../lib/" + appDirName + "/" + subDirectory));
 
-    if (QStringLiteral( "plugins") == subDirectory) {
+    if (QLatin1String( "plugins") == subDirectory) {
         dirList.append( QDir::cleanPath( appDir + "/../lib64/" + appDirName));
         dirList.append( QDir::cleanPath( appDir + "/../lib/" + appDirName));
     }
